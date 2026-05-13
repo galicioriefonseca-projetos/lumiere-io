@@ -1,0 +1,6 @@
+{
+  "name": "Lumiere",
+  "description": "Sistema PWA de gamificação e gestão para salões de beleza, incluindo dashboards em tempo real, metas mensais e ranking de profissionais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
