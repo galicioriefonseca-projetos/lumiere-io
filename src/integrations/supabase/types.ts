@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          amount: number
+          client_name: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          kind: Database["public"]["Enums"]["achievement_kind"]
+          occurred_at: string
+          professional_id: string
+          salon_id: string
+        }
+        Insert: {
+          amount: number
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          id?: string
+          kind: Database["public"]["Enums"]["achievement_kind"]
+          occurred_at?: string
+          professional_id: string
+          salon_id: string
+        }
+        Update: {
+          amount?: number
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["achievement_kind"]
+          occurred_at?: string
+          professional_id?: string
+          salon_id?: string
+        }
+        Relationships: []
+      }
       ai_insights: {
         Row: {
           body: Json
@@ -85,6 +124,36 @@ export type Database = {
           id?: string
           meta?: Json
           salon_id?: string | null
+        }
+        Relationships: []
+      }
+      badges: {
+        Row: {
+          awarded_at: string
+          code: string
+          id: string
+          label: string
+          professional_id: string
+          reference_month: string
+          salon_id: string
+        }
+        Insert: {
+          awarded_at?: string
+          code: string
+          id?: string
+          label: string
+          professional_id: string
+          reference_month: string
+          salon_id: string
+        }
+        Update: {
+          awarded_at?: string
+          code?: string
+          id?: string
+          label?: string
+          professional_id?: string
+          reference_month?: string
+          salon_id?: string
         }
         Relationships: []
       }
@@ -228,6 +297,39 @@ export type Database = {
           },
         ]
       }
+      evaluations: {
+        Row: {
+          achievement_id: string | null
+          client_name: string | null
+          comment: string | null
+          created_at: string
+          id: string
+          professional_id: string
+          rating: number
+          salon_id: string
+        }
+        Insert: {
+          achievement_id?: string | null
+          client_name?: string | null
+          comment?: string | null
+          created_at?: string
+          id?: string
+          professional_id: string
+          rating: number
+          salon_id: string
+        }
+        Update: {
+          achievement_id?: string | null
+          client_name?: string | null
+          comment?: string | null
+          created_at?: string
+          id?: string
+          professional_id?: string
+          rating?: number
+          salon_id?: string
+        }
+        Relationships: []
+      }
       professionals: {
         Row: {
           active: boolean
@@ -307,37 +409,82 @@ export type Database = {
           },
         ]
       }
+      salon_goals: {
+        Row: {
+          created_at: string
+          id: string
+          month: number
+          salon_id: string
+          target_revenue: number
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          month: number
+          salon_id: string
+          target_revenue?: number
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          month?: number
+          salon_id?: string
+          target_revenue?: number
+          updated_at?: string
+          year?: number
+        }
+        Relationships: []
+      }
       salons: {
         Row: {
+          activation_status: string
           brand_accent_color: string | null
           brand_primary_color: string | null
+          business_type: Database["public"]["Enums"]["business_type"]
           created_at: string
           has_custom_branding: boolean
           id: string
+          is_active: boolean
           logo_url: string | null
           name: string
+          onboarded_at: string | null
+          owner_name: string | null
           plan: Database["public"]["Enums"]["salon_plan"]
           updated_at: string
         }
         Insert: {
+          activation_status?: string
           brand_accent_color?: string | null
           brand_primary_color?: string | null
+          business_type?: Database["public"]["Enums"]["business_type"]
           created_at?: string
           has_custom_branding?: boolean
           id?: string
+          is_active?: boolean
           logo_url?: string | null
           name?: string
+          onboarded_at?: string | null
+          owner_name?: string | null
           plan?: Database["public"]["Enums"]["salon_plan"]
           updated_at?: string
         }
         Update: {
+          activation_status?: string
           brand_accent_color?: string | null
           brand_primary_color?: string | null
+          business_type?: Database["public"]["Enums"]["business_type"]
           created_at?: string
           has_custom_branding?: boolean
           id?: string
+          is_active?: boolean
           logo_url?: string | null
           name?: string
+          onboarded_at?: string | null
+          owner_name?: string | null
           plan?: Database["public"]["Enums"]["salon_plan"]
           updated_at?: string
         }
@@ -388,9 +535,12 @@ export type Database = {
         Returns: boolean
       }
       is_master_admin: { Args: { _user_id: string }; Returns: boolean }
+      salon_is_active: { Args: { _salon: string }; Returns: boolean }
     }
     Enums: {
+      achievement_kind: "service" | "product"
       app_role: "master_admin" | "owner" | "manager" | "professional"
+      business_type: "salon" | "clinic"
       salon_plan: "studio" | "elite"
     }
     CompositeTypes: {
@@ -519,7 +669,9 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      achievement_kind: ["service", "product"],
       app_role: ["master_admin", "owner", "manager", "professional"],
+      business_type: ["salon", "clinic"],
       salon_plan: ["studio", "elite"],
     },
   },
