@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import {
-  Sparkles, Scissors, Stethoscope, LogOut, ShieldCheck, Eye, EyeOff, Loader2,
+  Sparkles, Scissors, Stethoscope, LogOut, ShieldCheck, Eye, EyeOff, Loader2, ArrowRight,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { BusinessType } from "@/lib/vertical";

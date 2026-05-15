@@ -183,7 +183,7 @@ export default function Agendamentos() {
       time: format(parseISO(appt.appointment_date as string), "HH:mm"),
       notes: (appt.notes as string) || "",
     });
-    setEditingId(appt.id);
+    setEditingId(appt.id as string);
     setOpen(true);
   };
 

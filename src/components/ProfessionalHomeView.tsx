@@ -350,7 +350,7 @@ export const ProfessionalHomeView = () => {
                   Nenhum agendamento para hoje.
                 </div>
              ) : (
-                todayAppointments.map((appt: { id: string; appointment_date: string; client_name: string; services?: { name: string } }) => (
+                todayAppointments.map((appt: any) => (
                   <Card key={appt.id} className="glass border-border/40 p-4 relative overflow-hidden group hover:border-accent/30 transition-colors">
                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent/40 group-hover:bg-accent transition-colors" />
                      <div className="flex items-center justify-between">
@@ -389,7 +389,7 @@ export const ProfessionalHomeView = () => {
           </h2>
           <Card className="glass border-border/40 overflow-hidden divide-y divide-border/20">
             {myActivity && myActivity.length > 0 ? (
-              myActivity.map((b: { id: string; description: string; occurred_at: string }) => (
+              myActivity.map((b: any) => (
                 <div key={b.id} className="p-4 flex items-center justify-between hover:bg-accent/5 transition-colors group">
                   <div className="flex items-center gap-4">
                     <div className="h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">

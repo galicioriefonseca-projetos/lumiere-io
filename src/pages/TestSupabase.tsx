@@ -24,7 +24,7 @@ export default function TestSupabase() {
         setSalons(data || []);
       } catch (e: unknown) {
         console.error("Supabase test error:", e);
-        setError(e.message || "Erro desconhecido ao conectar com Supabase");
+        setError((e as Error).message || "Erro desconhecido ao conectar com Supabase");
       } finally {
         setLoading(false);
       }
@@ -101,11 +101,11 @@ export default function TestSupabase() {
             </div>
           ) : salons.length > 0 ? (
             <div className="divide-y divide-white/5">
-              {salons.map((salon) => (
+              {salons.map((salon: any) => (
                 <div key={salon.id} className="py-3 flex justify-between items-center">
                   <span className="font-medium">{salon.name}</span>
                   <Badge variant="outline" className="text-[10px] uppercase font-mono">
-                    {salon.id.split('-')[0]}...
+                    {String(salon.id).split('-')[0]}...
                   </Badge>
                 </div>
               ))}

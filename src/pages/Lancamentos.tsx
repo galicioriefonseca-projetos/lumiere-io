@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Receipt, Scissors, ShoppingBag, Search, Filter } from "lucide-react";
 import { fmtBRL, monthRange } from "@/lib/aura";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 const Lancamentos = () => {
   const { salon, loading: permsLoading, isMasterAdmin } = usePermissions();

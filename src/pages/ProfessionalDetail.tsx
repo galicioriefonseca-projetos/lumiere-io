@@ -196,7 +196,7 @@ const ProfessionalDetail = () => {
                 <Card className="glass border-border/40 overflow-hidden">
                   <div className="divide-y divide-border/20">
                     {data.recentActivities.length > 0 ? (
-                      data.recentActivities.map((act: { id: string; kind: string; description: string; occurred_at: string; score_delta?: number }) => (
+                      data.recentActivities.map((act: any) => (
                         <div key={act.id} className="p-4 flex items-center justify-between hover:bg-accent/5 transition-colors group">
                           <div className="flex items-center gap-4">
                              <div className="h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">

@@ -105,13 +105,7 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, React.ComponentProp
       color,
       nameKey,
       labelKey,
-    }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> & {
-      hideLabel?: boolean;
-      hideIndicator?: boolean;
-      indicator?: "line" | "dot" | "dashed";
-      nameKey?: string;
-      labelKey?: string;
-    },
+    }: any,
     ref,
   ) => {
     const { config } = useChart();
