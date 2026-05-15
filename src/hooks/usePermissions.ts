@@ -22,6 +22,8 @@ export type Salon = {
   owner_name: string | null;
   onboarded_at: string | null;
   business_type?: string | null;
+  phone?: string | null;
+  tax_id?: string | null;
 };
 
 export type Profile = {

@@ -39,11 +39,11 @@ const Clientes = () => {
   const openEdit = (client: Record<string, unknown>) => {
     setEditingClient(client);
     setForm({
-      client_name: client.client_name,
-      client_phone: client.client_phone || "",
-      client_email: client.client_email || "",
-      birth_date: client.birth_date || "",
-      notes: client.notes || "",
+      client_name: String(client.client_name ?? ""),
+      client_phone: String(client.client_phone ?? ""),
+      client_email: String(client.client_email ?? ""),
+      birth_date: String(client.birth_date ?? ""),
+      notes: String(client.notes ?? ""),
     });
     setOpen(true);
   };
@@ -117,7 +117,7 @@ const Clientes = () => {
         client_email: parsed.data.client_email || null,
         birth_date: parsed.data.birth_date || null,
         notes: parsed.data.notes || null,
-      }).eq("id", editingClient.id);
+      }).eq("id", editingClient!.id as string);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -301,7 +301,7 @@ const Clientes = () => {
               </div>
               <div>
                 <SheetTitle className="font-display text-2xl tracking-tight text-gradient-gold">
-                  {selectedClient?.client_name}
+                  {selectedClient?.client_name as string}
                 </SheetTitle>
                 <SheetDescription className="flex items-center gap-2 mt-1">
                   Cliente desde {selectedClient?.created_at ? new Date(selectedClient.created_at as string).toLocaleDateString("pt-BR") : "N/A"}

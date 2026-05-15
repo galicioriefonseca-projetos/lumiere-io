@@ -26,7 +26,7 @@ type NavItem = {
 
 export const AppShell = ({ children, minimal = false }: { children: ReactNode, minimal?: boolean }) => {
   const { signOut, user } = useAuth();
-  const { loading, profile, salon, plan, isMasterAdmin, can, isOwner, isManager, isProfessionalOnly } = usePermissions();
+  const { loading, profile, salon, plan, isMasterAdmin, can, isOwner, isManager, isReceptionist, isProfessionalOnly } = usePermissions();
   const { logoUrl, isCustomBranded } = useTheme();
   const { t } = useVertical();
   const loc = useLocation();

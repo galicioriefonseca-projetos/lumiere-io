@@ -163,7 +163,7 @@ export default function Servicos() {
       price: service.price as number,
       category_id: (service.category_id as string) || "",
     });
-    setEditingId(service.id);
+    setEditingId(service.id as string);
     setOpen(true);
   };
 
