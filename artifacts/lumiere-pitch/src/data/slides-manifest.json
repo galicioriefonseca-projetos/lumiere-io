@@ -1,0 +1,82 @@
+[
+  {
+    "id": "c1d2e3f4-a5b6-7890-cd12-ef3456789012",
+    "position": 1,
+    "filepath": "src/pages/slides/Capa.tsx",
+    "title": "Capa",
+    "description": "Slide de abertura — Lumière.io",
+    "speakerNotes": ""
+  },
+  {
+    "id": "d2e3f4a5-b6c7-8901-de23-f45678901234",
+    "position": 2,
+    "filepath": "src/pages/slides/OProblema.tsx",
+    "title": "O Problema",
+    "description": "Três pontos críticos que o setor enfrenta",
+    "speakerNotes": ""
+  },
+  {
+    "id": "e3f4a5b6-c7d8-9012-ef34-056789012345",
+    "position": 3,
+    "filepath": "src/pages/slides/ASolucao.tsx",
+    "title": "A Solução",
+    "description": "Lumière como resposta ao problema do setor",
+    "speakerNotes": ""
+  },
+  {
+    "id": "f4a5b6c7-d8e9-0123-f045-16789abcdef0",
+    "position": 4,
+    "filepath": "src/pages/slides/Plataforma.tsx",
+    "title": "Plataforma",
+    "description": "Os quatro módulos principais do produto",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a5b6c7d8-e9f0-1234-ab56-789012345678",
+    "position": 5,
+    "filepath": "src/pages/slides/Mercado.tsx",
+    "title": "Mercado",
+    "description": "Tamanho e oportunidade do mercado lusófono",
+    "speakerNotes": ""
+  },
+  {
+    "id": "b6c7d8e9-f012-3456-bc67-890123456789",
+    "position": 6,
+    "filepath": "src/pages/slides/ModeloDeNegocios.tsx",
+    "title": "Modelo de Negócios",
+    "description": "SaaS por assinatura mensal — três planos",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c7d8e9f0-1234-5678-cd78-901234567890",
+    "position": 7,
+    "filepath": "src/pages/slides/Tracao.tsx",
+    "title": "Tração",
+    "description": "Onde o produto está hoje",
+    "speakerNotes": ""
+  },
+  {
+    "id": "d8e9f012-3456-789a-de89-012345678901",
+    "position": 8,
+    "filepath": "src/pages/slides/Equipe.tsx",
+    "title": "Equipe",
+    "description": "As pessoas por trás do Lumière.io",
+    "speakerNotes": ""
+  },
+  {
+    "id": "e9f01234-5678-9abc-ef90-123456789012",
+    "position": 9,
+    "filepath": "src/pages/slides/OPedido.tsx",
+    "title": "O Pedido",
+    "description": "Rodada Pré-Semente — alocação e objetivos",
+    "speakerNotes": ""
+  },
+  {
+    "id": "f0123456-789a-bcde-f001-234567890123",
+    "position": 10,
+    "filepath": "src/pages/slides/Encerramento.tsx",
+    "title": "Encerramento",
+    "description": "Slide de encerramento com contato",
+    "speakerNotes": ""
+  }
+]

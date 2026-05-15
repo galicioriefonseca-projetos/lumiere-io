@@ -1,0 +1,31 @@
+kind = "slides"
+previewPath = "/lumiere-pitch/"
+title = "Lumière Pitch Deck"
+version = "1.0.0"
+id = "artifacts/lumiere-pitch"
+router = "path"
+
+[[integratedSkills]]
+name = "slides"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/lumiere-pitch/" ]
+localPort = 26089
+
+[services.development]
+run = "pnpm --filter @workspace/lumiere-pitch run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lumiere-pitch", "run", "build" ]
+publicDir = "artifacts/lumiere-pitch/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26089"
+BASE_PATH = "/lumiere-pitch/"
