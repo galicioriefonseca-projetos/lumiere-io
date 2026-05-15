@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { type ComponentProps } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -20,13 +20,14 @@ import { supabase } from "@/lib/supabase";
 const C = colors.dark;
 const TAB_BAR_H = Platform.OS === "web" ? 84 : 70;
 
-type Stat = { label: string; value: string; icon: string; color: string };
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+type Stat = { label: string; value: string; icon: IoniconName; color: string };
 
 function StatCard({ stat }: { stat: Stat }) {
   return (
     <View style={styles.statCard}>
       <View style={[styles.statIcon, { backgroundColor: stat.color + "22" }]}>
-        <Ionicons name={stat.icon as any} size={22} color={stat.color} />
+        <Ionicons name={stat.icon} size={22} color={stat.color} />
       </View>
       <Text style={styles.statValue}>{stat.value}</Text>
       <Text style={styles.statLabel}>{stat.label}</Text>
@@ -121,8 +122,8 @@ export default function DashboardScreen() {
           ? (evals.reduce((a: number, e: any) => a + e.score, 0) / evals.length).toFixed(1)
           : "—";
 
-      const revenue = goalRes?.current_revenue
-        ? `R$ ${Number(goalRes.current_revenue).toLocaleString("pt-BR")}`
+      const revenue = goalRes?.data?.current_revenue
+        ? `R$ ${Number(goalRes.data.current_revenue).toLocaleString("pt-BR")}`
         : "—";
 
       return {

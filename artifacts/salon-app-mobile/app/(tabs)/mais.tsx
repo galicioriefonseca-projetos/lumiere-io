@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import React from "react";
+import { useRouter, type Href } from "expo-router";
+import React, { type ComponentProps } from "react";
 import {
   Alert,
   Platform,
@@ -19,11 +19,13 @@ import { useAuth } from "@/contexts/AuthContext";
 const C = colors.dark;
 const TAB_BAR_H = Platform.OS === "web" ? 84 : 70;
 
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
 type Section = {
-  icon: string;
+  icon: IoniconName;
   label: string;
   sub: string;
-  route: string;
+  route: Href<string>;
   color: string;
 };
 
@@ -33,6 +35,7 @@ const SECTIONS: { title: string; items: Section[] }[] = [
     items: [
       { icon: "people-circle-outline", label: "Clientes", sub: "Gestão de clientes", route: "/clientes", color: "#6ea8fe" },
       { icon: "cut-outline", label: "Serviços", sub: "Catálogo de serviços", route: "/servicos", color: "#a78bfa" },
+      { icon: "grid-outline", label: "Categorias", sub: "Categorias de serviços", route: "/categorias", color: "#22d3ee" },
       { icon: "receipt-outline", label: "Lançamentos", sub: "Entradas e saídas", route: "/lancamentos", color: "#5fc97c" },
     ],
   },
@@ -58,10 +61,10 @@ function SectionRow({ item }: { item: Section }) {
   return (
     <Pressable
       style={({ pressed }) => [styles.row, pressed && { opacity: 0.75 }]}
-      onPress={() => router.push(item.route as any)}
+      onPress={() => router.push(item.route)}
     >
       <View style={[styles.rowIcon, { backgroundColor: item.color + "1a" }]}>
-        <Ionicons name={item.icon as any} size={20} color={item.color} />
+        <Ionicons name={item.icon} size={20} color={item.color} />
       </View>
       <View style={styles.rowText}>
         <Text style={styles.rowLabel}>{item.label}</Text>
@@ -130,7 +133,7 @@ export default function MaisScreen() {
             <Text style={styles.sectionTitle}>{section.title}</Text>
             <View style={styles.sectionCard}>
               {section.items.map((item, idx) => (
-                <View key={item.route}>
+                <View key={String(item.route)}>
                   <SectionRow item={item} />
                   {idx < section.items.length - 1 && (
                     <View style={styles.separator} />

@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { type ComponentProps } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -39,20 +39,32 @@ const LEVEL_COLORS: Record<string, { from: string; to: string; text: string }> =
     diamond: { from: "#a8d8ea", to: "#6ea8fe", text: "#060c1a" },
   };
 
-const DEFAULT_ICONS: string[] = [
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
+const VALID_ACHIEVEMENT_ICONS: IoniconName[] = [
   "trophy",
   "star",
   "medal",
   "ribbon",
   "flame",
   "diamond",
+  "heart",
+  "flash",
+  "thumbs-up",
+  "gift",
+  "sparkles",
 ];
+
+function resolveAchievementIcon(raw: string | undefined): IoniconName {
+  const candidate = raw as IoniconName;
+  return VALID_ACHIEVEMENT_ICONS.includes(candidate) ? candidate : "trophy";
+}
 
 function AchievementCard({ item }: { item: Achievement }) {
   const level = (item.level ?? "bronze").toLowerCase();
   const levelColor =
     LEVEL_COLORS[level] ?? LEVEL_COLORS.bronze;
-  const iconName = item.icon ?? "trophy";
+  const iconName = resolveAchievementIcon(item.icon);
 
   return (
     <View style={[styles.card, !item.earned && styles.cardLocked]}>
@@ -80,7 +92,7 @@ function AchievementCard({ item }: { item: Achievement }) {
         <Ionicons
           name={
             item.earned
-              ? (iconName as any)
+              ? iconName
               : "lock-closed-outline"
           }
           size={24}

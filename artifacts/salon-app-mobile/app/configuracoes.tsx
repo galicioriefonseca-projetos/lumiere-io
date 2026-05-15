@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { type ComponentProps } from "react";
 import {
   Platform,
   Pressable,
@@ -17,8 +17,10 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const C = colors.dark;
 
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
 type RowProps = {
-  icon: string;
+  icon: IoniconName;
   label: string;
   value?: string;
   onPress?: () => void;
@@ -33,7 +35,7 @@ function Row({ icon, label, value, onPress, chevron = true }: RowProps) {
       disabled={!onPress}
     >
       <View style={[styles.rowIcon, { backgroundColor: C.muted }]}>
-        <Ionicons name={icon as any} size={18} color={C.accent} />
+        <Ionicons name={icon} size={18} color={C.accent} />
       </View>
       <Text style={styles.rowLabel}>{label}</Text>
       <View style={styles.rowRight}>

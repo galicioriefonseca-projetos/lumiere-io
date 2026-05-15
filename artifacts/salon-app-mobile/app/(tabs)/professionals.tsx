@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   ActivityIndicator,
@@ -30,6 +31,7 @@ type Professional = {
 };
 
 function ProfessionalCard({ item }: { item: Professional }) {
+  const router = useRouter();
   const initials = item.name
     .split(" ")
     .slice(0, 2)
@@ -38,7 +40,10 @@ function ProfessionalCard({ item }: { item: Professional }) {
     .toUpperCase();
 
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={({ pressed }) => [styles.card, pressed && { opacity: 0.8 }]}
+      onPress={() => router.push(`/profissional/${item.id}`)}
+    >
       <View style={styles.avatar}>
         <Text style={styles.avatarText}>{initials}</Text>
       </View>
@@ -64,7 +69,7 @@ function ProfessionalCard({ item }: { item: Professional }) {
         </View>
       </View>
       <Ionicons name="chevron-forward" size={18} color={C.border} />
-    </View>
+    </Pressable>
   );
 }
 
@@ -107,7 +112,7 @@ export default function ProfessionalsScreen() {
       ) : error ? (
         <View style={styles.centered}>
           <Ionicons name="warning-outline" size={32} color={C.destructive} />
-          <Text style={styles.errorText}>Erro ao carregar profissionais</Text>
+          <Text style={styles.emptyText}>Erro ao carregar profissionais</Text>
           <Pressable style={styles.retryBtn} onPress={() => refetch()}>
             <Text style={styles.retryText}>Tentar novamente</Text>
           </Pressable>
@@ -174,9 +179,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   avatar: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: C.accent + "22",
     borderWidth: 1.5,
     borderColor: C.accent,
@@ -188,10 +193,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: C.accent,
   },
-  cardInfo: { flex: 1, gap: 4 },
+  cardInfo: { flex: 1, gap: 3 },
   name: {
     fontFamily: "Inter_600SemiBold",
-    fontSize: 15,
+    fontSize: 16,
     color: C.foreground,
   },
   specialty: {
@@ -199,15 +204,15 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: C.mutedForeground,
   },
-  badges: { flexDirection: "row", gap: 6, flexWrap: "wrap" },
+  badges: { flexDirection: "row", gap: 6, marginTop: 2, flexWrap: "wrap" },
   badge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#1a3a1a",
+    backgroundColor: "#0e2a14",
     borderRadius: 6,
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    gap: 5,
   },
   dot: {
     width: 6,
@@ -220,7 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "#5fc97c",
   },
-  commBadge: { backgroundColor: C.accent + "18" },
+  commBadge: { backgroundColor: C.accent + "22" },
   commText: {
     fontFamily: "Inter_500Medium",
     fontSize: 11,
@@ -232,11 +237,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
     paddingTop: 60,
-  },
-  errorText: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: C.mutedForeground,
   },
   emptyText: {
     fontFamily: "Inter_400Regular",

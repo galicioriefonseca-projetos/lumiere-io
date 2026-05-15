@@ -72,6 +72,8 @@ function RootLayoutNav() {
         <Stack.Screen name="checklists" options={SCREEN_OPTS} />
         <Stack.Screen name="insights" options={SCREEN_OPTS} />
         <Stack.Screen name="lancamentos" options={SCREEN_OPTS} />
+        <Stack.Screen name="categorias" options={SCREEN_OPTS} />
+        <Stack.Screen name="profissional/[id]" options={SCREEN_OPTS} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </AuthGuard>

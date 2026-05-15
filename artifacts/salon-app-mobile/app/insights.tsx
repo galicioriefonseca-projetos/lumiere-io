@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { type ComponentProps } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -30,8 +30,10 @@ type InsightData = {
   topProfessional?: string;
 };
 
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
 type KpiCardProps = {
-  icon: string;
+  icon: IoniconName;
   label: string;
   value: string;
   sub?: string;
@@ -48,7 +50,7 @@ function KpiCard({ icon, label, value, sub, color }: KpiCardProps) {
         end={{ x: 1, y: 1 }}
       />
       <View style={[styles.kpiIcon, { backgroundColor: color + "22" }]}>
-        <Ionicons name={icon as any} size={20} color={color} />
+        <Ionicons name={icon} size={20} color={color} />
       </View>
       <Text style={styles.kpiValue}>{value}</Text>
       <Text style={styles.kpiLabel}>{label}</Text>

@@ -35,7 +35,7 @@ function ProgressBar({ value, max, color }: { value: number; max: number; color:
   const pct = Math.min(Math.max(0, max > 0 ? value / max : 0), 1);
   return (
     <View style={progStyles.track}>
-      <View style={[progStyles.fill, { width: `${pct * 100}%` as any, backgroundColor: color }]} />
+      <View style={[progStyles.fill, { width: `${Math.round(pct * 100)}%` as `${number}%`, backgroundColor: color }]} />
     </View>
   );
 }
