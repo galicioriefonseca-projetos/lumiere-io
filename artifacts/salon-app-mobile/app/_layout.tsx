@@ -6,10 +6,12 @@ import {
   useFonts,
 } from "@expo-google-fonts/inter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as Linking from "expo-linking";
+import * as Notifications from "expo-notifications";
 import { Stack, useRouter, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { ActivityIndicator, Platform, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -17,6 +19,12 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import colors from "@/constants/colors";
+import {
+  isPushEnabled,
+  registerForPushNotifications,
+  removePushToken,
+  savePushToken,
+} from "@/lib/notifications";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -55,11 +63,103 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function NotificationsSetup() {
+  const { session } = useAuth();
+  const router = useRouter();
+  const notificationListener = useRef<Notifications.EventSubscription | null>(null);
+  const responseListener = useRef<Notifications.EventSubscription | null>(null);
+  const prevUserId = useRef<string | null>(null);
+
+  function handleNotificationResponse(
+    response: Notifications.NotificationResponse
+  ) {
+    const data = response.notification.request.content.data as Record<
+      string,
+      unknown
+    >;
+    const appointmentId = data?.appointmentId as string | undefined;
+    if (appointmentId) {
+      router.push(
+        `/(tabs)/appointments?appointmentId=${encodeURIComponent(appointmentId)}`
+      );
+    } else {
+      router.push("/(tabs)/appointments");
+    }
+  }
+
+  useEffect(() => {
+    if (Platform.OS === "web") return;
+
+    const userId = session?.user?.id ?? null;
+
+    if (!userId) {
+      if (prevUserId.current) {
+        removePushToken(prevUserId.current).catch(() => {});
+        prevUserId.current = null;
+      }
+      return;
+    }
+
+    if (userId === prevUserId.current) return;
+    prevUserId.current = userId;
+
+    let cancelled = false;
+
+    (async () => {
+      const enabled = await isPushEnabled();
+      if (!enabled || cancelled) return;
+      const token = await registerForPushNotifications();
+      if (token && !cancelled) {
+        await savePushToken(userId, token).catch(() => {});
+      }
+    })();
+
+    Notifications.getLastNotificationResponseAsync().then((response) => {
+      if (response && !cancelled) {
+        handleNotificationResponse(response);
+      }
+    });
+
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener(() => {});
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener(
+        handleNotificationResponse
+      );
+
+    return () => {
+      cancelled = true;
+      notificationListener.current?.remove();
+      responseListener.current?.remove();
+    };
+  }, [session?.user?.id]);
+
+  useEffect(() => {
+    if (Platform.OS === "web") return;
+    const subscription = Linking.addEventListener("url", ({ url }) => {
+      const parsed = Linking.parse(url);
+      const appointmentId = parsed.queryParams?.appointmentId as
+        | string
+        | undefined;
+      if (parsed.path?.includes("appointments") && appointmentId) {
+        router.push(
+          `/(tabs)/appointments?appointmentId=${encodeURIComponent(appointmentId)}`
+        );
+      }
+    });
+    return () => subscription.remove();
+  }, []);
+
+  return null;
+}
+
 const SCREEN_OPTS = { headerShown: false };
 
 function RootLayoutNav() {
   return (
     <AuthGuard>
+      <NotificationsSetup />
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={SCREEN_OPTS} />
         <Stack.Screen name="auth" options={SCREEN_OPTS} />

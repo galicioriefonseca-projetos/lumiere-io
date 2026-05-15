@@ -1,12 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React, { type ComponentProps } from "react";
+import React, { type ComponentProps, useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   Platform,
   Pressable,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   View,
 } from "react-native";
@@ -14,6 +17,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import colors from "@/constants/colors";
 import { useAuth } from "@/contexts/AuthContext";
+import {
+  NOTIF_PREF_KEY,
+  registerForPushNotifications,
+  removePushToken,
+  savePushToken,
+} from "@/lib/notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const C = colors.dark;
 
@@ -25,12 +35,13 @@ type RowProps = {
   value?: string;
   onPress?: () => void;
   chevron?: boolean;
+  right?: React.ReactNode;
 };
 
-function Row({ icon, label, value, onPress, chevron = true }: RowProps) {
+function Row({ icon, label, value, onPress, chevron = true, right }: RowProps) {
   return (
     <Pressable
-      style={({ pressed }) => [styles.row, pressed && { opacity: 0.7 }]}
+      style={({ pressed }) => [styles.row, pressed && onPress && { opacity: 0.7 }]}
       onPress={onPress}
       disabled={!onPress}
     >
@@ -39,8 +50,9 @@ function Row({ icon, label, value, onPress, chevron = true }: RowProps) {
       </View>
       <Text style={styles.rowLabel}>{label}</Text>
       <View style={styles.rowRight}>
+        {right}
         {value && <Text style={styles.rowValue}>{value}</Text>}
-        {chevron && onPress && (
+        {chevron && onPress && !right && (
           <Ionicons name="chevron-forward" size={16} color={C.border} />
         )}
       </View>
@@ -63,10 +75,62 @@ export default function ConfiguracoesScreen() {
   const { user, isMaster } = useAuth();
   const router = useRouter();
 
+  const [pushEnabled, setPushEnabled] = useState(false);
+  const [pushLoading, setPushLoading] = useState(false);
+  const [pushLoaded, setPushLoaded] = useState(false);
+
   const initials = (user?.email ?? "?")
     .split("@")[0]
     .slice(0, 2)
     .toUpperCase();
+
+  useEffect(() => {
+    AsyncStorage.getItem(NOTIF_PREF_KEY).then((val) => {
+      setPushEnabled(val === "true");
+      setPushLoaded(true);
+    });
+  }, []);
+
+  const handleTogglePush = async (value: boolean) => {
+    if (Platform.OS === "web") {
+      Alert.alert(
+        "Não disponível",
+        "Notificações push não estão disponíveis na versão web. Use o app móvel."
+      );
+      return;
+    }
+    if (!user?.id) return;
+
+    setPushLoading(true);
+    try {
+      if (value) {
+        const token = await registerForPushNotifications();
+        if (!token) {
+          Alert.alert(
+            "Permissão negada",
+            "Ative as notificações nas configurações do dispositivo para receber alertas de agendamento."
+          );
+          setPushLoading(false);
+          return;
+        }
+        await savePushToken(user.id, token);
+        await AsyncStorage.setItem(NOTIF_PREF_KEY, "true");
+        setPushEnabled(true);
+        Alert.alert(
+          "Notificações ativadas",
+          "Você receberá alertas quando novos agendamentos forem criados."
+        );
+      } else {
+        await removePushToken(user.id);
+        await AsyncStorage.setItem(NOTIF_PREF_KEY, "false");
+        setPushEnabled(false);
+      }
+    } catch {
+      Alert.alert("Erro", "Não foi possível atualizar as configurações de notificação.");
+    } finally {
+      setPushLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -113,7 +177,37 @@ export default function ConfiguracoesScreen() {
         </Section>
 
         <Section title="Notificações">
-          <Row icon="notifications-outline" label="Notificações Push" onPress={() => {}} />
+          <Row
+            icon="notifications-outline"
+            label="Notificações Push"
+            chevron={false}
+            right={
+              pushLoaded ? (
+                pushLoading ? (
+                  <ActivityIndicator size="small" color={C.accent} />
+                ) : (
+                  <Switch
+                    value={pushEnabled}
+                    onValueChange={handleTogglePush}
+                    trackColor={{ false: C.border, true: C.accent + "88" }}
+                    thumbColor={pushEnabled ? C.accent : C.mutedForeground}
+                    ios_backgroundColor={C.border}
+                  />
+                )
+              ) : null
+            }
+          />
+          {pushEnabled && (
+            <>
+              <View style={styles.separator} />
+              <View style={styles.notifStatus}>
+                <Ionicons name="checkmark-circle" size={14} color="#5fc97c" />
+                <Text style={styles.notifStatusText}>
+                  Alertas de novos agendamentos ativados
+                </Text>
+              </View>
+            </>
+          )}
           <View style={styles.separator} />
           <Row icon="mail-unread-outline" label="Alertas por e-mail" onPress={() => {}} />
         </Section>
@@ -209,4 +303,17 @@ const styles = StyleSheet.create({
   rowRight: { flexDirection: "row", alignItems: "center", gap: 8 },
   rowValue: { fontFamily: "Inter_400Regular", fontSize: 14, color: C.mutedForeground },
   separator: { height: 1, backgroundColor: C.border, marginHorizontal: 14 },
+  notifStatus: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    backgroundColor: "#0e2a14",
+  },
+  notifStatusText: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 12,
+    color: "#5fc97c",
+  },
 });

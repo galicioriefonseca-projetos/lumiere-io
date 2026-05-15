@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -48,7 +49,13 @@ function formatDate(iso?: string) {
   });
 }
 
-function AppointmentCard({ item }: { item: Appointment }) {
+function AppointmentCard({
+  item,
+  highlighted,
+}: {
+  item: Appointment;
+  highlighted?: boolean;
+}) {
   const statusInfo = STATUS_MAP[item.status ?? ""] ?? {
     label: item.status ?? "—",
     color: C.mutedForeground,
@@ -56,7 +63,12 @@ function AppointmentCard({ item }: { item: Appointment }) {
   };
 
   return (
-    <View style={styles.card}>
+    <View
+      style={[
+        styles.card,
+        highlighted && styles.cardHighlighted,
+      ]}
+    >
       <View style={styles.cardLeft}>
         <View style={[styles.statusDot, { backgroundColor: statusInfo.color }]} />
       </View>
@@ -107,6 +119,12 @@ function AppointmentCard({ item }: { item: Appointment }) {
             </View>
           )}
         </View>
+        {highlighted && (
+          <View style={styles.highlightBadge}>
+            <Ionicons name="notifications" size={11} color={C.accent} />
+            <Text style={styles.highlightText}>Aberto via notificação</Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -125,6 +143,8 @@ export default function AppointmentsScreen() {
   const insets = useSafeAreaInsets();
   const topPad = Platform.OS === "web" ? 67 : insets.top;
   const [filter, setFilter] = useState("Todos");
+  const { appointmentId } = useLocalSearchParams<{ appointmentId?: string }>();
+  const listRef = useRef<FlatList<Appointment>>(null);
 
   const { data, isLoading, refetch, isRefetching, error } = useQuery({
     queryKey: ["appointments"],
@@ -148,6 +168,31 @@ export default function AppointmentsScreen() {
   const filtered = statusKey
     ? (data ?? []).filter((a) => a.status === statusKey)
     : (data ?? []);
+
+  const pendingScrollRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!appointmentId || !data || data.length === 0) return;
+    const exists = data.some((a) => a.id === appointmentId);
+    if (!exists) return;
+    pendingScrollRef.current = appointmentId;
+    setFilter("Todos");
+  }, [appointmentId, data]);
+
+  useEffect(() => {
+    const target = pendingScrollRef.current;
+    if (!target || filter !== "Todos") return;
+    const idx = filtered.findIndex((a) => a.id === target);
+    if (idx === -1) return;
+    pendingScrollRef.current = null;
+    setTimeout(() => {
+      listRef.current?.scrollToIndex({
+        index: idx,
+        animated: true,
+        viewPosition: 0.2,
+      });
+    }, 150);
+  }, [filter, filtered]);
 
   return (
     <View style={styles.container}>
@@ -202,15 +247,30 @@ export default function AppointmentsScreen() {
         </View>
       ) : (
         <FlatList
+          ref={listRef}
           data={filtered}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <AppointmentCard item={item} />}
+          renderItem={({ item }) => (
+            <AppointmentCard
+              item={item}
+              highlighted={item.id === appointmentId}
+            />
+          )}
           contentContainerStyle={[
             styles.list,
             { paddingBottom: TAB_BAR_H + 24 },
           ]}
           showsVerticalScrollIndicator={false}
           scrollEnabled={!!filtered.length}
+          onScrollToIndexFailed={(info) => {
+            setTimeout(() => {
+              listRef.current?.scrollToIndex({
+                index: info.index,
+                animated: true,
+                viewPosition: 0.2,
+              });
+            }, 500);
+          }}
           refreshControl={
             <RefreshControl
               refreshing={isRefetching}
@@ -279,6 +339,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     overflow: "hidden",
   },
+  cardHighlighted: {
+    borderColor: C.accent,
+    backgroundColor: C.accent + "0d",
+  },
   cardLeft: {
     width: 4,
     backgroundColor: C.border,
@@ -318,6 +382,22 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 12,
     color: C.mutedForeground,
+  },
+  highlightBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    alignSelf: "flex-start",
+    backgroundColor: C.accent + "22",
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    marginTop: 2,
+  },
+  highlightText: {
+    fontFamily: "Inter_500Medium",
+    fontSize: 11,
+    color: C.accent,
   },
   centered: {
     flex: 1,
