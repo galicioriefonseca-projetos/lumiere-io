@@ -28,7 +28,7 @@ export const geminiService = {
       kind: "salon_overview",
       title: insight.title,
       summary: insight.summary,
-      body: insight.body as unknown as Record<string, unknown>,
+      body: insight.body as any,
       model: "google/gemini-2.5-flash",
       digital_signature: signature,
     });
