@@ -16,29 +16,28 @@ function NativeTabLayout() {
         <Icon sf={{ default: "chart.bar", selected: "chart.bar.fill" }} />
         <Label>Dashboard</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="professionals">
-        <Icon sf={{ default: "person.2", selected: "person.2.fill" }} />
-        <Label>Equipe</Label>
-      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="appointments">
         <Icon sf={{ default: "calendar", selected: "calendar.badge.clock" }} />
         <Label>Agenda</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="professionals">
+        <Icon sf={{ default: "person.2", selected: "person.2.fill" }} />
+        <Label>Equipe</Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="gamification">
         <Icon sf={{ default: "trophy", selected: "trophy.fill" }} />
         <Label>Conquistas</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="settings">
-        <Icon sf={{ default: "gearshape", selected: "gearshape.fill" }} />
-        <Label>Config</Label>
+      <NativeTabs.Trigger name="mais">
+        <Icon sf={{ default: "ellipsis.circle", selected: "ellipsis.circle.fill" }} />
+        <Label>Mais</Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
 }
 
 function ClassicTabLayout() {
-  const colorScheme = useColorScheme();
-  const C = colorScheme === "dark" ? colors.dark : colors.dark;
+  const C = colors.dark;
   const isIOS = Platform.OS === "ios";
   const isWeb = Platform.OS === "web";
 
@@ -90,18 +89,6 @@ function ClassicTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="professionals"
-        options={{
-          title: "Equipe",
-          tabBarIcon: ({ color, size }) =>
-            isIOS ? (
-              <SymbolView name="person.2.fill" tintColor={color} size={size} />
-            ) : (
-              <Ionicons name="people" size={size} color={color} />
-            ),
-        }}
-      />
-      <Tabs.Screen
         name="appointments"
         options={{
           title: "Agenda",
@@ -110,6 +97,18 @@ function ClassicTabLayout() {
               <SymbolView name="calendar" tintColor={color} size={size} />
             ) : (
               <Ionicons name="calendar" size={size} color={color} />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="professionals"
+        options={{
+          title: "Equipe",
+          tabBarIcon: ({ color, size }) =>
+            isIOS ? (
+              <SymbolView name="person.2.fill" tintColor={color} size={size} />
+            ) : (
+              <Ionicons name="people" size={size} color={color} />
             ),
         }}
       />
@@ -126,14 +125,14 @@ function ClassicTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="mais"
         options={{
-          title: "Config",
+          title: "Mais",
           tabBarIcon: ({ color, size }) =>
             isIOS ? (
-              <SymbolView name="gearshape.fill" tintColor={color} size={size} />
+              <SymbolView name="ellipsis.circle.fill" tintColor={color} size={size} />
             ) : (
-              <Ionicons name="settings" size={size} color={color} />
+              <Ionicons name="ellipsis-horizontal-circle" size={size} color={color} />
             ),
         }}
       />

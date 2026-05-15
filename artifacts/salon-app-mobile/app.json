@@ -14,9 +14,12 @@
       "backgroundColor": "#060c1a"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "io.lumiere.salon"
     },
-    "android": {},
+    "android": {
+      "package": "io.lumiere.salon"
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },

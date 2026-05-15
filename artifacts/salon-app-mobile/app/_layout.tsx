@@ -55,12 +55,23 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+const SCREEN_OPTS = { headerShown: false };
+
 function RootLayoutNav() {
   return (
     <AuthGuard>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="auth" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={SCREEN_OPTS} />
+        <Stack.Screen name="auth" options={SCREEN_OPTS} />
+        <Stack.Screen name="configuracoes" options={SCREEN_OPTS} />
+        <Stack.Screen name="clientes" options={SCREEN_OPTS} />
+        <Stack.Screen name="avaliacoes" options={SCREEN_OPTS} />
+        <Stack.Screen name="metas" options={SCREEN_OPTS} />
+        <Stack.Screen name="servicos" options={SCREEN_OPTS} />
+        <Stack.Screen name="comissoes" options={SCREEN_OPTS} />
+        <Stack.Screen name="checklists" options={SCREEN_OPTS} />
+        <Stack.Screen name="insights" options={SCREEN_OPTS} />
+        <Stack.Screen name="lancamentos" options={SCREEN_OPTS} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </AuthGuard>
