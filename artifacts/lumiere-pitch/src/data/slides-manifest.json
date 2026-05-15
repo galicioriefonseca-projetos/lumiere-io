@@ -5,7 +5,7 @@
     "filepath": "src/pages/slides/Capa.tsx",
     "title": "Capa",
     "description": "Slide de abertura — Lumière.io",
-    "speakerNotes": ""
+    "speakerNotes": "• Apresente-se brevemente e agradeça o tempo do investidor — mantenha a abertura calorosa mas direta.\n• Lumière significa «luz» em francês — o nome carrega a ideia de trazer clareza e visibilidade à gestão de salões, um setor que ainda opera no escuro.\n• Em 10 minutos você vai entender por que o maior mercado de beleza do mundo ainda não tem um software de gestão que esteja à altura.\n• Deixe o logotipo falar por si: o dourado e o azul profundo comunicam posicionamento premium antes de qualquer palavra.\n• Transição: «Vamos começar pelo problema que motivou tudo isso.»"
   },
   {
     "id": "d2e3f4a5-b6c7-8901-de23-f45678901234",
@@ -13,7 +13,7 @@
     "filepath": "src/pages/slides/OProblema.tsx",
     "title": "O Problema",
     "description": "Três pontos críticos que o setor enfrenta",
-    "speakerNotes": ""
+    "speakerNotes": "• Ponto 01 — Controle fragmentado: a maioria dos salões ainda usa cadernos ou planilhas isoladas para agendar, registrar comissões e controlar estoque — sistemas que nunca conversam entre si.\n• Ponto 02 — Equipe sem métricas: profissionais não sabem suas metas, não veem suas comissões em tempo real e não recebem reconhecimento estruturado — isso gera desmotivação e alta rotatividade.\n• Ponto 03 — Decisões sem dados: o dono toma decisões estratégicas por intuição — não sabe qual serviço mais lucra, qual profissional está abaixo do esperado, nem onde está perdendo receita.\n• Esses três problemas não são independentes: um alimenta o outro em um ciclo que impede o crescimento do negócio.\n• Transição: «A Lumière resolve os três com uma plataforma integrada.»"
   },
   {
     "id": "e3f4a5b6-c7d8-9012-ef34-056789012345",
@@ -21,7 +21,7 @@
     "filepath": "src/pages/slides/ASolucao.tsx",
     "title": "A Solução",
     "description": "Lumière como resposta ao problema do setor",
-    "speakerNotes": ""
+    "speakerNotes": "• A Lumière é a primeira plataforma de gestão premium construída especificamente para salões de beleza lusófonos — não um software genérico adaptado.\n• Unificamos em um só lugar: agendamentos, avaliações de profissionais, comissões, metas, gamificação e relatórios — tudo integrado e em tempo real.\n• O produto existe em duas superfícies: um dashboard web completo para o gestor e um app mobile para acompanhar o negócio de qualquer lugar.\n• A proposta de valor central é transformar dados fragmentados em visibilidade e controle — do caderno ao cockpit.\n• Transição: «Veja os quatro módulos principais que compõem essa solução.»"
   },
   {
     "id": "f4a5b6c7-d8e9-0123-f045-16789abcdef0",
@@ -29,7 +29,7 @@
     "filepath": "src/pages/slides/Plataforma.tsx",
     "title": "Plataforma",
     "description": "Os quatro módulos principais do produto",
-    "speakerNotes": ""
+    "speakerNotes": "• Módulo 1 — Agenda: agendamento visual com status em tempo real, notificações automáticas e histórico de clientes — elimina o caderno de vez.\n• Módulo 2 — Equipe & Avaliações: cada profissional tem um perfil com métricas de desempenho, notas de avaliação e histórico de comissões transparente.\n• Módulo 3 — Metas & Gamificação: sistema de conquistas e rankings que engaja a equipe sem custo adicional — transforma gestão em motivação.\n• Módulo 4 — Insights & Modo TV: relatórios financeiros e dashboard ao vivo projetável na TV da recepção — o salão como ambiente de alta performance.\n• Transição: são 26 telas funcionais entregues — não wireframes, produto real — agora veja o tamanho da oportunidade que estamos endereçando."
   },
   {
     "id": "a5b6c7d8-e9f0-1234-ab56-789012345678",
@@ -37,7 +37,7 @@
     "filepath": "src/pages/slides/Mercado.tsx",
     "title": "Mercado",
     "description": "Tamanho e oportunidade do mercado lusófono",
-    "speakerNotes": ""
+    "speakerNotes": "• O Brasil tem 800 mil salões ativos registrados — é o 3º maior mercado de beleza do mundo, atrás apenas de EUA e China.\n• Menos de 20% desses salões usam qualquer software de gestão — a maioria ainda está no analógico. Isso é uma janela de oportunidade enorme antes que o mercado consolide.\n• O Brasil é só o começo: Portugal, Angola e Moçambique formam uma expansão natural pela língua e cultura compartilhadas — mesmo produto, zero custo de localização.\n• Se capturarmos 1% do mercado brasileiro no plano Pro (R$399/mês), isso representa R$38M ARR — e estamos falando de apenas 8.000 salões.\n• Transição: «Veja como monetizamos essa oportunidade.»"
   },
   {
     "id": "b6c7d8e9-f012-3456-bc67-890123456789",
@@ -45,7 +45,7 @@
     "filepath": "src/pages/slides/ModeloDeNegocios.tsx",
     "title": "Modelo de Negócios",
     "description": "SaaS por assinatura mensal — três planos",
-    "speakerNotes": ""
+    "speakerNotes": "• Modelo SaaS com três planos desenhados para capturar salões de todos os tamanhos: Essencial para quem está começando a digitalizar, Pro para o salão médio que quer crescer, Enterprise para redes.\n• O plano Pro é o coração da estratégia: equipe ilimitada, comissões, metas e gamificação — é onde fica a maioria do nosso TAM e onde o churn é mais baixo.\n• Receita previsível e recorrente: o SaaS elimina a sazonalidade do setor de beleza e cria um ativo de LTV alto.\n• O ticket médio Pro de R$399/mês representa menos de 1% do faturamento médio de um salão — a proposta de valor paga o próprio custo em semanas.\n• Transição: «Essas premissas já estão se provando com nossos primeiros clientes.»"
   },
   {
     "id": "c7d8e9f0-1234-5678-cd78-901234567890",
@@ -53,7 +53,7 @@
     "filepath": "src/pages/slides/Tracao.tsx",
     "title": "Tração",
     "description": "12 salões beta, 8.400+ agendamentos, 91% retenção semanal",
-    "speakerNotes": ""
+    "speakerNotes": "• Produto real em produção: web com 26 telas funcionais e app mobile iOS & Android com 5 módulos — não é MVP, é plataforma completa.\n• 12 salões parceiros em beta fechado em São Paulo, Rio de Janeiro e Porto Alegre — feedback direto para iterar o produto em múltiplos contextos.\n• 8.400+ agendamentos gerenciados e avaliação média 4,8★ — volume que valida robustez técnica e satisfação dos usuários finais.\n• 91% de retenção semanal: usuários voltam toda semana sem incentivo pago — o número mais importante que um early-stage SaaS pode mostrar.\n• Transição: CAC zero durante todo o beta — com esses números, projete o crescimento financeiro no próximo slide."
   },
   {
     "id": "a1b2c3d4-e5f6-7890-ab12-cd3456789012",
@@ -61,7 +61,7 @@
     "filepath": "src/pages/slides/ProjecaoFinanceira.tsx",
     "title": "Projeção Financeira",
     "description": "Modelo ARR Anos 1–3: R$540k → R$2,4M → R$8,1M",
-    "speakerNotes": ""
+    "speakerNotes": "• Premissas conservadoras: ticket médio Pro R$399/mês, churn mensal 2,5%, crescimento orgânico + referral — sem depender de mídia paga, LTV médio ~40 meses por salão.\n• Ano 1 — R$540k ARR: escala dos 12 salões beta para ~115 pagantes — meta atingível com o time atual, sem contratações adicionais.\n• Ano 2 — R$2,4M ARR: primeiras redes Enterprise e aceleração via parcerias com distribuidores de produtos capilares.\n• Ano 3 — R$8,1M ARR: expansão para Portugal e início em Angola com produto completamente localizado.\n• Transição: «Conheça a equipe que vai executar esse plano.»"
   },
   {
     "id": "d8e9f012-3456-789a-de89-012345678901",
@@ -69,7 +69,7 @@
     "filepath": "src/pages/slides/Equipe.tsx",
     "title": "Equipe",
     "description": "As pessoas por trás do Lumière.io",
-    "speakerNotes": ""
+    "speakerNotes": "• Apresente cada membro destacando a combinação que importa para investidores: experiência técnica + domínio de mercado + histórico de execução.\n• Enfatize que a equipe fundadora tem conhecimento de primeira mão do setor de beleza — não estamos resolvendo um problema genérico, estamos resolvendo o nosso próprio problema.\n• Se houver advisors ou mentores relevantes no ecossistema, mencione-os aqui para reforçar credibilidade e network.\n• Destaque qualquer experiência prévia em startups, empresas de referência ou projetos com escala — padrão de execução importa mais do que diplomas.\n• Transição: «Com esse time e com a tração que já temos, aqui está o que precisamos para ir para o próximo nível.»"
   },
   {
     "id": "e9f01234-5678-9abc-ef90-123456789012",
@@ -77,7 +77,7 @@
     "filepath": "src/pages/slides/OPedido.tsx",
     "title": "O Pedido",
     "description": "Rodada Pré-Semente R$600k — 18 meses de runway",
-    "speakerNotes": ""
+    "speakerNotes": "• Captando R$600k em Pré-Semente com valuation cap de R$5M — precificação responsável para uma empresa com produto funcional e tração comprovada.\n• 18 meses de runway: saímos de 12 salões beta para 300+ pagantes e validamos o modelo de expansão lusófona — suficiente para a próxima rodada.\n• Alocação defensável: 40% produto (features Enterprise + integrações), 35% go-to-market (CSM e parcerias de canal), 25% equipe técnica.\n• Ao final dos 18 meses: ARR ~R$1,4M e métricas para uma rodada Semente de R$3–5M — piso, não teto.\n• Transição: acesso exclusivo ao 3º maior mercado de beleza do mundo antes que grandes players internacionais cheguem — a janela está aberta agora."
   },
   {
     "id": "f0123456-789a-bcde-f001-234567890123",
@@ -85,6 +85,6 @@
     "filepath": "src/pages/slides/Encerramento.tsx",
     "title": "Encerramento",
     "description": "Slide de encerramento com contato",
-    "speakerNotes": ""
+    "speakerNotes": "• Agradeça o tempo e a atenção — seja genuíno e direto, sem formalidades excessivas.\n• Reforce a mensagem central em uma frase: «800 mil salões, menos de 20% digitalizados, produto em produção com 91% de retenção — o momento é agora.»\n• Abra para perguntas convidando tópicos específicos: produto, mercado, financeiro ou equipe — demonstra preparo e confiança.\n• Deixe claro o próximo passo desejado: reunião de follow-up, acesso à due diligence ou convite para visitar um salão beta ao vivo.\n• Tenha o deck de apêndice pronto com dados detalhados de cohort, metodologia das projeções e perfil dos salões beta — investidores sérios vão perguntar."
   }
 ]
