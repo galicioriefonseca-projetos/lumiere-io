@@ -1,0 +1,31 @@
+kind = "video"
+previewPath = "/lumiere-promo/"
+title = "Lumière Mobile Promo"
+version = "1.0.0"
+id = "artifacts/lumiere-promo"
+router = "path"
+
+[[integratedSkills]]
+name = "video-js"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/lumiere-promo/" ]
+localPort = 23302
+
+[services.development]
+run = "pnpm --filter @workspace/lumiere-promo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lumiere-promo", "run", "build" ]
+publicDir = "artifacts/lumiere-promo/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23302"
+BASE_PATH = "/lumiere-promo/"
