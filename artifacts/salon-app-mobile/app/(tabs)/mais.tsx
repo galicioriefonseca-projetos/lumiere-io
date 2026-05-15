@@ -29,7 +29,7 @@ type Section = {
   color: string;
 };
 
-const SECTIONS: { title: string; items: Section[] }[] = [
+const SECTIONS: { title: string; items: Section[]; masterOnly?: boolean }[] = [
   {
     title: "Operacional",
     items: [
@@ -52,6 +52,14 @@ const SECTIONS: { title: string; items: Section[] }[] = [
     items: [
       { icon: "star-half-outline", label: "Avaliações", sub: "Notas dos clientes", route: "/avaliacoes", color: "#f4c430" },
       { icon: "trending-up-outline", label: "Insights", sub: "Relatórios e análises", route: "/insights", color: "#22d3ee" },
+      { icon: "tv-outline", label: "Modo TV", sub: "Painel de agendamentos", route: "/modo-tv", color: "#6ea8fe" },
+    ],
+  },
+  {
+    title: "Administração",
+    masterOnly: true,
+    items: [
+      { icon: "shield-checkmark-outline", label: "Master Admin", sub: "Gestão de todos os salões", route: "/master", color: C.accent },
     ],
   },
 ];
@@ -128,7 +136,7 @@ export default function MaisScreen() {
           <Ionicons name="chevron-forward" size={16} color={C.border} />
         </Pressable>
 
-        {SECTIONS.map((section) => (
+        {SECTIONS.filter((s) => !s.masterOnly || isMaster).map((section) => (
           <View key={section.title} style={styles.section}>
             <Text style={styles.sectionTitle}>{section.title}</Text>
             <View style={styles.sectionCard}>

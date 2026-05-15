@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { Redirect } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -23,6 +23,7 @@ const C = colors.dark;
 export default function AuthScreen() {
   const { session } = useAuth();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -136,6 +137,13 @@ export default function AuthScreen() {
               <Text style={styles.btnText}>Entrar</Text>
             )}
           </Pressable>
+
+          <Pressable
+            onPress={() => router.push("/forgot-password")}
+            style={styles.forgotBtn}
+          >
+            <Text style={styles.forgotText}>Esqueceu a senha?</Text>
+          </Pressable>
         </View>
       </KeyboardAvoidingView>
     </LinearGradient>
@@ -230,6 +238,17 @@ const styles = StyleSheet.create({
     color: C.foreground,
   },
   eyeBtn: { padding: 4 },
+  forgotBtn: {
+    alignItems: "center",
+    marginTop: 14,
+    paddingVertical: 4,
+  },
+  forgotText: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+    color: C.mutedForeground,
+    textDecorationLine: "underline",
+  },
   btn: {
     height: 50,
     borderRadius: 10,

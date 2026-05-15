@@ -74,6 +74,13 @@ function RootLayoutNav() {
         <Stack.Screen name="lancamentos" options={SCREEN_OPTS} />
         <Stack.Screen name="categorias" options={SCREEN_OPTS} />
         <Stack.Screen name="profissional/[id]" options={SCREEN_OPTS} />
+        <Stack.Screen name="forgot-password" options={SCREEN_OPTS} />
+        <Stack.Screen name="reset-password" options={SCREEN_OPTS} />
+        <Stack.Screen name="setup" options={SCREEN_OPTS} />
+        <Stack.Screen name="modo-tv" options={SCREEN_OPTS} />
+        <Stack.Screen name="master" options={SCREEN_OPTS} />
+        <Stack.Screen name="convite/[salonId]" options={SCREEN_OPTS} />
+        <Stack.Screen name="avaliar/[salonId]/[proId]" options={SCREEN_OPTS} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </AuthGuard>
