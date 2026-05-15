@@ -21,8 +21,8 @@ export default function Tracao() {
         </span>
       </div>
 
-      <div className="absolute inset-0 flex flex-col px-[8vw] py-[8vh]">
-        <div className="mb-[5vh]">
+      <div className="absolute inset-0 flex flex-col px-[8vw] py-[7vh]">
+        <div className="mb-[4vh]">
           <p
             className="font-body uppercase mb-[1.5vh]"
             style={{ fontSize: "1.5vw", color: "#e8b23a", letterSpacing: "0.2em" }}
@@ -41,74 +41,110 @@ export default function Tracao() {
           />
         </div>
 
-        <div className="flex flex-col flex-1 justify-center gap-[4.5vh]">
-          <div className="flex items-start gap-[3vw]">
-            <div
-              className="font-display font-bold shrink-0"
-              style={{ fontSize: "3vw", color: "#e8b23a", minWidth: "7vw" }}
-            >
-              Web
+        <div className="flex gap-[4vw] flex-1">
+          <div className="flex flex-col gap-[3vh] flex-1">
+            <div className="flex items-start gap-[2.5vw]">
+              <div
+                className="font-display font-bold shrink-0"
+                style={{ fontSize: "2.6vw", color: "#e8b23a", minWidth: "6vw" }}
+              >
+                Web
+              </div>
+              <div>
+                <p
+                  className="font-display font-semibold mb-[0.6vh]"
+                  style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
+                >
+                  Plataforma completa — 26 telas funcionais
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: "1.8vw", color: "#9d9a8c" }}
+                >
+                  Agendamentos, avaliações, comissões, metas, gamificação e modo TV.
+                </p>
+              </div>
             </div>
-            <div>
-              <p
-                className="font-display font-semibold mb-[0.8vh]"
-                style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
+
+            <div className="flex items-start gap-[2.5vw]">
+              <div
+                className="font-display font-bold shrink-0"
+                style={{ fontSize: "2.6vw", color: "#e8b23a", minWidth: "6vw" }}
               >
-                Plataforma web completa — 26 telas funcionais
-              </p>
-              <p
-                className="font-body"
-                style={{ fontSize: "2vw", color: "#9d9a8c" }}
+                Mobile
+              </div>
+              <div>
+                <p
+                  className="font-display font-semibold mb-[0.6vh]"
+                  style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
+                >
+                  App nativo iOS & Android — 5 módulos
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: "1.8vw", color: "#9d9a8c" }}
+                >
+                  Dashboard em tempo real, equipe, agenda e conquistas acessíveis de qualquer lugar.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-[2.5vw]">
+              <div
+                className="font-display font-bold shrink-0"
+                style={{ fontSize: "2.6vw", color: "#e8b23a", minWidth: "6vw" }}
               >
-                Gestão de agendamentos, avaliações, equipe, comissões, metas e modo TV.
-              </p>
+                Beta
+              </div>
+              <div>
+                <p
+                  className="font-display font-semibold mb-[0.6vh]"
+                  style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
+                >
+                  12 salões parceiros em fase beta fechada
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: "1.8vw", color: "#9d9a8c" }}
+                >
+                  São Paulo, Rio de Janeiro e Porto Alegre — feedback direto para iterar o produto.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-start gap-[3vw]">
-            <div
-              className="font-display font-bold shrink-0"
-              style={{ fontSize: "3vw", color: "#e8b23a", minWidth: "7vw" }}
-            >
-              Mobile
-            </div>
-            <div>
-              <p
-                className="font-display font-semibold mb-[0.8vh]"
-                style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
+          <div
+            className="flex flex-col justify-center gap-[2.5vh] shrink-0"
+            style={{ width: "28vw" }}
+          >
+            {[
+              { value: "8.400+", label: "agendamentos gerenciados" },
+              { value: "4,8 ★", label: "avaliação média dos profissionais" },
+              { value: "91%", label: "retenção semanal na plataforma" },
+              { value: "R$ 0", label: "custo de aquisição (beta orgânico)" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="px-[2vw] py-[1.8vh]"
+                style={{
+                  background: "rgba(11,18,37,0.8)",
+                  border: "0.1vh solid rgba(232,178,58,0.25)",
+                }}
               >
-                Aplicativo nativo para iOS e Android
-              </p>
-              <p
-                className="font-body"
-                style={{ fontSize: "2vw", color: "#9d9a8c" }}
-              >
-                Dashboard em tempo real, equipe, agenda e conquistas acessíveis de qualquer lugar.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-[3vw]">
-            <div
-              className="font-display font-bold shrink-0"
-              style={{ fontSize: "3vw", color: "#e8b23a", minWidth: "7vw" }}
-            >
-              Beta
-            </div>
-            <div>
-              <p
-                className="font-display font-semibold mb-[0.8vh]"
-                style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
-              >
-                Fase beta com primeiros salões parceiros
-              </p>
-              <p
-                className="font-body"
-                style={{ fontSize: "2vw", color: "#9d9a8c" }}
-              >
-                Feedback direto de donos e profissionais para iterar o produto com velocidade.
-              </p>
-            </div>
+                <p
+                  className="font-display font-bold leading-none mb-[0.6vh]"
+                  style={{ fontSize: "2.8vw", color: "#e8b23a" }}
+                >
+                  {value}
+                </p>
+                <p
+                  className="font-body"
+                  style={{ fontSize: "1.6vw", color: "#9d9a8c" }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

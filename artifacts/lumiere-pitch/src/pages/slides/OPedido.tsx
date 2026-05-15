@@ -40,7 +40,7 @@ export default function OPedido() {
           O Pedido
         </p>
         <h2
-          className="font-display font-bold tracking-tight leading-tight mb-[4vh]"
+          className="font-display font-bold tracking-tight leading-tight mb-[1.5vh]"
           style={{ fontSize: "5vw", color: "#f9f7f0" }}
         >
           <span className="block">Rodada</span>
@@ -48,44 +48,68 @@ export default function OPedido() {
             Pré-Semente
           </span>
         </h2>
+
+        <div className="flex items-baseline gap-[2vw] mb-[4vh]">
+          <span
+            className="font-display font-bold"
+            style={{ fontSize: "5.5vw", color: "#e8b23a" }}
+          >
+            R$ 600 mil
+          </span>
+          <span
+            className="font-body"
+            style={{ fontSize: "2vw", color: "#9d9a8c" }}
+          >
+            cap de valuation R$ 5M
+          </span>
+        </div>
+
         <div
-          className="w-[5vw] h-[0.2vh] mb-[5vh]"
+          className="w-[5vw] h-[0.2vh] mb-[1.5vh]"
           style={{ background: "#e8b23a" }}
         />
 
-        <div className="flex gap-[6vw]">
+        <p
+          className="font-body mb-[4vh]"
+          style={{ fontSize: "1.8vw", color: "#9d9a8c" }}
+        >
+          Runway de <span style={{ color: "#f9f7f0" }}>18 meses</span> — do produto completo ao
+          crescimento escalável
+        </p>
+
+        <div className="flex gap-[4vw]">
           <div>
             <p
-              className="font-display font-semibold mb-[0.8vh]"
-              style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
+              className="font-display font-semibold mb-[0.5vh]"
+              style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
             >
-              Produto
+              40% — Produto
             </p>
-            <p className="font-body" style={{ fontSize: "2vw", color: "#9d9a8c" }}>
+            <p className="font-body" style={{ fontSize: "1.8vw", color: "#9d9a8c" }}>
               Desenvolvimento e infraestrutura
             </p>
           </div>
 
           <div>
             <p
-              className="font-display font-semibold mb-[0.8vh]"
-              style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
+              className="font-display font-semibold mb-[0.5vh]"
+              style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
             >
-              Go-to-Market
+              35% — Go-to-Market
             </p>
-            <p className="font-body" style={{ fontSize: "2vw", color: "#9d9a8c" }}>
+            <p className="font-body" style={{ fontSize: "1.8vw", color: "#9d9a8c" }}>
               Aquisição e parcerias com salões
             </p>
           </div>
 
           <div>
             <p
-              className="font-display font-semibold mb-[0.8vh]"
-              style={{ fontSize: "2.5vw", color: "#f9f7f0" }}
+              className="font-display font-semibold mb-[0.5vh]"
+              style={{ fontSize: "2.2vw", color: "#f9f7f0" }}
             >
-              Equipe
+              25% — Equipe
             </p>
-            <p className="font-body" style={{ fontSize: "2vw", color: "#9d9a8c" }}>
+            <p className="font-body" style={{ fontSize: "1.8vw", color: "#9d9a8c" }}>
               Crescimento da equipe técnica
             </p>
           </div>

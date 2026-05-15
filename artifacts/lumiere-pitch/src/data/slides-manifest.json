@@ -52,12 +52,20 @@
     "position": 7,
     "filepath": "src/pages/slides/Tracao.tsx",
     "title": "Tração",
-    "description": "Onde o produto está hoje",
+    "description": "12 salões beta, 8.400+ agendamentos, 91% retenção semanal",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-ab12-cd3456789012",
+    "position": 8,
+    "filepath": "src/pages/slides/ProjecaoFinanceira.tsx",
+    "title": "Projeção Financeira",
+    "description": "Modelo ARR Anos 1–3: R$540k → R$2,4M → R$8,1M",
     "speakerNotes": ""
   },
   {
     "id": "d8e9f012-3456-789a-de89-012345678901",
-    "position": 8,
+    "position": 9,
     "filepath": "src/pages/slides/Equipe.tsx",
     "title": "Equipe",
     "description": "As pessoas por trás do Lumière.io",
@@ -65,15 +73,15 @@
   },
   {
     "id": "e9f01234-5678-9abc-ef90-123456789012",
-    "position": 9,
+    "position": 10,
     "filepath": "src/pages/slides/OPedido.tsx",
     "title": "O Pedido",
-    "description": "Rodada Pré-Semente — alocação e objetivos",
+    "description": "Rodada Pré-Semente R$600k — 18 meses de runway",
     "speakerNotes": ""
   },
   {
     "id": "f0123456-789a-bcde-f001-234567890123",
-    "position": 10,
+    "position": 11,
     "filepath": "src/pages/slides/Encerramento.tsx",
     "title": "Encerramento",
     "description": "Slide de encerramento com contato",
