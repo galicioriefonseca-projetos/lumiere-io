@@ -504,6 +504,30 @@ export type Database = {
         }
         Relationships: []
       }
+      founder_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          max_uses: number | null
+          uses: number
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          max_uses?: number | null
+          uses?: number
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          max_uses?: number | null
+          uses?: number
+        }
+        Relationships: []
+      }
       professionals: {
         Row: {
           active: boolean
@@ -879,6 +903,40 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_update_salon: {
+        Args: { _patch: Json; _salon_id: string }
+        Returns: {
+          activation_status: string
+          brand_accent_color: string | null
+          brand_primary_color: string | null
+          business_type: Database["public"]["Enums"]["business_type"]
+          city: string | null
+          created_at: string
+          founder_started_at: string | null
+          has_custom_branding: boolean
+          id: string
+          is_active: boolean
+          logo_url: string | null
+          name: string
+          onboarded_at: string | null
+          owner_name: string | null
+          phone: string | null
+          plan: Database["public"]["Enums"]["salon_plan"]
+          professional_count_estimate: number | null
+          state: string | null
+          subscription_status: string
+          tax_id: string | null
+          trial_ends_at: string | null
+          tutorial_seen_at: string | null
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "salons"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       create_salon_rpc: { Args: { _payload: Json }; Returns: Json }
       has_role: {
         Args: {
@@ -888,7 +946,9 @@ export type Database = {
         Returns: boolean
       }
       is_master_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_platform_admin: { Args: { _user_id: string }; Returns: boolean }
       salon_is_active: { Args: { _salon: string }; Returns: boolean }
+      validate_founder_code: { Args: { _code: string }; Returns: boolean }
     }
     Enums: {
       achievement_kind: "service" | "product"
