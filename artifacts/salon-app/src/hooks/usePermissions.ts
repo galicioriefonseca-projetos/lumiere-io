@@ -5,8 +5,8 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export const MASTER_ADMIN_EMAIL = "leandropfonseca20@gmail.com";
 
-export type AppRole = "master_admin" | "owner" | "manager" | "professional";
-export type SalonPlan = "studio" | "elite";
+export type AppRole = "master_admin" | "owner" | "manager" | "professional" | "platform_admin";
+export type SalonPlan = "studio" | "elite" | "start" | "performance" | "network" | "founder";
 export type ActivationStatus = "pending" | "active" | "suspended";
 
 export type Salon = {
@@ -98,9 +98,9 @@ export const usePermissions = () => {
 
   const hasRole = (r: AppRole) => isMasterAdmin || roles.includes(r);
 
-  const plan: SalonPlan = isMasterAdmin ? "elite" : (salon?.plan ?? "studio");
-  const isElite = plan === "elite";
-  const isStudio = plan === "studio";
+  const plan: SalonPlan = isMasterAdmin ? "network" : ((salon?.plan as SalonPlan) ?? "start");
+  const isElite = plan === "elite" || plan === "performance" || plan === "network";
+  const isStudio = plan === "studio" || plan === "founder";
 
   // License gates
   const activationStatus: ActivationStatus =
@@ -108,32 +108,39 @@ export const usePermissions = () => {
   const isSalonActive = isMasterAdmin || (!!salon?.is_active && activationStatus === "active");
   const needsOnboarding = !isMasterAdmin && !!salon && !salon.onboarded_at;
 
-  // Role-derived helpers (highest privilege wins)
   const isOwner = isMasterAdmin || roles.includes("owner");
   const isManager = isOwner || roles.includes("manager");
-  // Se for manager e o cargo profissional for Recepção, ou outras flags, mas vamos considerar recepcionista quem tem a String "Recepção" na tabela profissionais, e é um professional ou manager
   const isReceptionist = isManager || (proRole?.toLowerCase().includes("recepç") || proRole?.toLowerCase().includes("recepcion"));
-  
   const isProfessionalOnly =
     !isOwner && !isManager && !isReceptionist && roles.includes("professional");
+
+  // Importa flags por plano
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { featuresForPlan } = require("@/lib/planFeatures") as typeof import("@/lib/planFeatures");
+  const flags = featuresForPlan(plan);
 
   const can = {
     viewDashboard: true,
     useChecklists: true,
-    useTVMode: isMasterAdmin || isElite,
-    useAIInsights: isMasterAdmin || isElite,
-    useCustomBranding: isMasterAdmin || (isElite && !!salon?.has_custom_branding),
+    useTVMode: isMasterAdmin || flags.modoTV,
+    useAIInsights: isMasterAdmin || flags.insightsAI,
+    useCustomBranding: isMasterAdmin || (flags.customBranding && !!salon?.has_custom_branding),
     manageBilling: isMasterAdmin || hasRole("owner"),
     accessMasterPanel: isMasterAdmin,
     viewFinancials: isOwner,
     manageQuality: isManager,
     manageTeam: isOwner,
     quickLaunchOnly: isProfessionalOnly,
+    useComissoes: isMasterAdmin || flags.comissoes,
+    useAvaliacoes: isMasterAdmin || flags.avaliacoes,
+    useGamificacao: isMasterAdmin || flags.gamificacao,
+    useCategorias: isMasterAdmin || flags.categorias,
+    useMultiunidade: isMasterAdmin || flags.multiunidade,
   };
 
   const limits = {
-    maxProfessionals: isMasterAdmin || isElite ? Infinity : 5,
-    maxUsers: isMasterAdmin || isElite ? Infinity : 6,
+    maxProfessionals: isMasterAdmin ? Infinity : flags.maxPros,
+    maxUsers: isMasterAdmin ? Infinity : flags.maxPros + 2,
   };
 
   return {
