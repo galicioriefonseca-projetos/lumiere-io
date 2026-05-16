@@ -1006,7 +1006,7 @@ export const Constants = {
       app_role: ["master_admin", "owner", "manager", "professional", "platform_admin"],
       appointment_status: ["pending", "confirmed", "completed", "cancelled"],
       business_type: ["salon", "clinic"],
-      salon_plan: ["studio", "elite"],
+      salon_plan: ["studio", "elite", "start", "performance", "network", "founder"],
     },
   },
 } as const
