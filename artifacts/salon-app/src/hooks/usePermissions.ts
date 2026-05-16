@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { featuresForPlan } from "@/lib/planFeatures";
 
 export const MASTER_ADMIN_EMAIL = "leandropfonseca20@gmail.com";
 
@@ -114,9 +115,6 @@ export const usePermissions = () => {
   const isProfessionalOnly =
     !isOwner && !isManager && !isReceptionist && roles.includes("professional");
 
-  // Importa flags por plano
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { featuresForPlan } = require("@/lib/planFeatures") as typeof import("@/lib/planFeatures");
   const flags = featuresForPlan(plan);
 
   const can = {
