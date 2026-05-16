@@ -675,7 +675,9 @@ export type Database = {
           brand_accent_color: string | null
           brand_primary_color: string | null
           business_type: Database["public"]["Enums"]["business_type"]
+          city: string | null
           created_at: string
+          founder_started_at: string | null
           has_custom_branding: boolean
           id: string
           is_active: boolean
@@ -685,7 +687,11 @@ export type Database = {
           owner_name: string | null
           phone: string | null
           plan: Database["public"]["Enums"]["salon_plan"]
+          professional_count_estimate: number | null
+          state: string | null
+          subscription_status: string
           tax_id: string | null
+          trial_ends_at: string | null
           tutorial_seen_at: string | null
           updated_at: string
         }
@@ -694,7 +700,9 @@ export type Database = {
           brand_accent_color?: string | null
           brand_primary_color?: string | null
           business_type?: Database["public"]["Enums"]["business_type"]
+          city?: string | null
           created_at?: string
+          founder_started_at?: string | null
           has_custom_branding?: boolean
           id?: string
           is_active?: boolean
@@ -704,7 +712,11 @@ export type Database = {
           owner_name?: string | null
           phone?: string | null
           plan?: Database["public"]["Enums"]["salon_plan"]
+          professional_count_estimate?: number | null
+          state?: string | null
+          subscription_status?: string
           tax_id?: string | null
+          trial_ends_at?: string | null
           tutorial_seen_at?: string | null
           updated_at?: string
         }
@@ -713,7 +725,9 @@ export type Database = {
           brand_accent_color?: string | null
           brand_primary_color?: string | null
           business_type?: Database["public"]["Enums"]["business_type"]
+          city?: string | null
           created_at?: string
+          founder_started_at?: string | null
           has_custom_branding?: boolean
           id?: string
           is_active?: boolean
@@ -723,7 +737,11 @@ export type Database = {
           owner_name?: string | null
           phone?: string | null
           plan?: Database["public"]["Enums"]["salon_plan"]
+          professional_count_estimate?: number | null
+          state?: string | null
+          subscription_status?: string
           tax_id?: string | null
+          trial_ends_at?: string | null
           tutorial_seen_at?: string | null
           updated_at?: string
         }
@@ -874,10 +892,21 @@ export type Database = {
     }
     Enums: {
       achievement_kind: "service" | "product"
-      app_role: "master_admin" | "owner" | "manager" | "professional"
+      app_role:
+        | "master_admin"
+        | "owner"
+        | "manager"
+        | "professional"
+        | "platform_admin"
       appointment_status: "pending" | "confirmed" | "completed" | "cancelled"
       business_type: "salon" | "clinic"
-      salon_plan: "studio" | "elite"
+      salon_plan:
+        | "studio"
+        | "elite"
+        | "start"
+        | "performance"
+        | "network"
+        | "founder"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1006,10 +1035,23 @@ export const Constants = {
   public: {
     Enums: {
       achievement_kind: ["service", "product"],
-      app_role: ["master_admin", "owner", "manager", "professional"],
+      app_role: [
+        "master_admin",
+        "owner",
+        "manager",
+        "professional",
+        "platform_admin",
+      ],
       appointment_status: ["pending", "confirmed", "completed", "cancelled"],
       business_type: ["salon", "clinic"],
-      salon_plan: ["studio", "elite"],
+      salon_plan: [
+        "studio",
+        "elite",
+        "start",
+        "performance",
+        "network",
+        "founder",
+      ],
     },
   },
 } as const
