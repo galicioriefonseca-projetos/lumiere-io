@@ -684,6 +684,12 @@ export type Database = {
           plan: Database["public"]["Enums"]["salon_plan"]
           tax_id: string | null
           tutorial_seen_at: string | null
+          subscription_status: string
+          trial_ends_at: string | null
+          founder_started_at: string | null
+          city: string | null
+          state: string | null
+          professional_count_estimate: number | null
           updated_at: string
         }
         Insert: {
@@ -703,6 +709,12 @@ export type Database = {
           plan?: Database["public"]["Enums"]["salon_plan"]
           tax_id?: string | null
           tutorial_seen_at?: string | null
+          subscription_status?: string
+          trial_ends_at?: string | null
+          founder_started_at?: string | null
+          city?: string | null
+          state?: string | null
+          professional_count_estimate?: number | null
           updated_at?: string
         }
         Update: {
@@ -722,6 +734,12 @@ export type Database = {
           plan?: Database["public"]["Enums"]["salon_plan"]
           tax_id?: string | null
           tutorial_seen_at?: string | null
+          subscription_status?: string
+          trial_ends_at?: string | null
+          founder_started_at?: string | null
+          city?: string | null
+          state?: string | null
+          professional_count_estimate?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -871,10 +889,10 @@ export type Database = {
     }
     Enums: {
       achievement_kind: "service" | "product"
-      app_role: "master_admin" | "owner" | "manager" | "professional"
+      app_role: "master_admin" | "owner" | "manager" | "professional" | "platform_admin"
       appointment_status: "pending" | "confirmed" | "completed" | "cancelled"
       business_type: "salon" | "clinic"
-      salon_plan: "studio" | "elite"
+      salon_plan: "studio" | "elite" | "start" | "performance" | "network" | "founder"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1003,10 +1021,10 @@ export const Constants = {
   public: {
     Enums: {
       achievement_kind: ["service", "product"],
-      app_role: ["master_admin", "owner", "manager", "professional"],
+      app_role: ["master_admin", "owner", "manager", "professional", "platform_admin"],
       appointment_status: ["pending", "confirmed", "completed", "cancelled"],
       business_type: ["salon", "clinic"],
-      salon_plan: ["studio", "elite"],
+      salon_plan: ["studio", "elite", "start", "performance", "network", "founder"],
     },
   },
 } as const
