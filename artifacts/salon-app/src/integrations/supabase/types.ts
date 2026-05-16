@@ -1003,7 +1003,7 @@ export const Constants = {
   public: {
     Enums: {
       achievement_kind: ["service", "product"],
-      app_role: ["master_admin", "owner", "manager", "professional"],
+      app_role: ["master_admin", "owner", "manager", "professional", "platform_admin"],
       appointment_status: ["pending", "confirmed", "completed", "cancelled"],
       business_type: ["salon", "clinic"],
       salon_plan: ["studio", "elite"],
