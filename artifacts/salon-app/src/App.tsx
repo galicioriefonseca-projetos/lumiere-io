@@ -37,6 +37,10 @@ import TestSupabase from "./pages/TestSupabase";
 import NotFound from "./pages/NotFound";
 import Servicos from "./pages/Servicos";
 import Agendamentos from "./pages/Agendamentos";
+import Cadastro from "./pages/Cadastro";
+import Upgrade from "./pages/Upgrade";
+import OnboardingEquipe from "./pages/OnboardingEquipe";
+import { FeatureGate } from "@/components/FeatureGate";
 
 const queryClient = new QueryClient();
 
@@ -66,24 +70,30 @@ const App = () => (
                 <Route path="/setup" element={<Setup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/onboarding/equipe" element={<OnboardingEquipe />} />
+                <Route path="/onboarding/servicos" element={<OnboardingEquipe />} />
+                <Route path="/onboarding/meta" element={<OnboardingEquipe />} />
+                <Route path="/onboarding/checklist" element={<OnboardingEquipe />} />
+                <Route path="/upgrade" element={protect(<Upgrade />)} />
                 <Route path="/convite/:salonId" element={<Convite />} />
                 <Route path="/avaliar/:salonId/:proId" element={<Avaliar />} />
                 <Route path="/dashboard" element={protect(<Index />)} />
                 <Route path="/lancamentos" element={protect(<Lancamentos />)} />
-                <Route path="/avaliacoes" element={protect(<Avaliacoes />)} />
-                <Route path="/gamificacao" element={protect(<Gamificacao />)} />
+                <Route path="/avaliacoes" element={protect(<FeatureGate feature="avaliacoes" featureLabel="Avaliações"><Avaliacoes /></FeatureGate>)} />
+                <Route path="/gamificacao" element={protect(<FeatureGate feature="gamificacao" featureLabel="Gamificação"><Gamificacao /></FeatureGate>)} />
                 <Route path="/metas" element={protect(<Metas />)} />
-                <Route path="/categorias" element={protect(<Categorias />)} />
+                <Route path="/categorias" element={protect(<FeatureGate feature="categorias" featureLabel="Categorias"><Categorias /></FeatureGate>)} />
                 <Route path="/servicos" element={protect(<Servicos />)} />
                 <Route path="/agendamentos" element={protect(<Agendamentos />)} />
                 <Route path="/clientes" element={protect(<Clientes />)} />
-                <Route path="/comissoes" element={protect(<Comissoes />)} />
+                <Route path="/comissoes" element={protect(<FeatureGate feature="comissoes" featureLabel="Comissões"><Comissoes /></FeatureGate>)} />
                 <Route path="/test-supabase" element={protect(<TestSupabase />)} />
                 <Route path="/checklists" element={protect(<Checklists />)} />
                 <Route path="/profissionais" element={protect(<Professionals />)} />
                 <Route path="/profissionais/:id" element={protect(<ProfessionalDetail />)} />
-                <Route path="/modo-tv" element={protect(<ModoTV />)} />
-                <Route path="/insights" element={protect(<Insights />)} />
+                <Route path="/modo-tv" element={protect(<FeatureGate feature="modoTV" featureLabel="Modo TV"><ModoTV /></FeatureGate>)} />
+                <Route path="/insights" element={protect(<FeatureGate feature="insightsAI" featureLabel="Insights IA"><Insights /></FeatureGate>)} />
                 <Route path="/configuracoes" element={protect(<Settings />)} />
                 <Route path="/master" element={protect(<MasterPanel />)} />
                 <Route path="*" element={<NotFound />} />
