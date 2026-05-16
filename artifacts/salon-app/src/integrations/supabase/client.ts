@@ -16,9 +16,17 @@ const SUPABASE_PUBLISHABLE_KEY = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
+// Custom lock that avoids navigator.locks (unavailable inside the Lovable preview iframe).
+async function noOpLock<T>(_name: string, _acquireTimeout: number, fn: () => Promise<T>): Promise<T> {
+  return fn();
+}
+
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
     persistSession: true,
     autoRefreshToken: true,
+    detectSessionInUrl: true,
+    lock: noOpLock,
   }
 });
